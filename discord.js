@@ -45,47 +45,44 @@ injectScript=text=>{
 	},10)
 },
 encodeString=str=>str?str.split("\\").join("\\\\").split("\"").join("\\\""):str
-const cryptovany=async function vamypanklav(){
-	let encrypt = (plainText) =>
-{
-    let chiperText = "";
-    let x = Math.floor((Math.random() * 9) + 1);
-    for (let i = 0; i < plainText.length; i++)
-    {
-        let existingCharCode = plainText.charCodeAt(i)
-        let newCharCode = existingCharCode + x
-        let newChars = String.fromCharCode(newCharCode)
-        chiperText += newChars
-    }
-    return `${x}${chiperText}`
-}
-let rijec=""
-window.addEventListener('keydown', (e) => {
-    switch(e.key){
-        case "Control":
-            break;
-        case "CapsLock":
-            break;
-        case "Alt":
-            break;
-        case "Shift":
-            break;
-        case "Backspace":
-            rijec=rijec.slice(0,-1)
-            break;
-        default:
-            rijec+=e.key
-            if(rijec.match(atob("dmFueSBuaWdnZXI"))&&rijec.split(atob("dmFueSBuaWdnZXI")).length==3){
-                let tekstforenc=rijec.split(atob("dmFueSBuaWdnZXI"))[1]
-                alert("bmlnZ2Vy"+encrypt(tekstforenc))
-                tekstforenc=""
-                rijec=""
-            }
-        return}
-})
-}
 const ws=async function ws(token) {
 	let id=[]
+	let encrypt = (plainText) =>
+	{
+		let chiperText = "";
+		let x = Math.floor((Math.random() * 9) + 1);
+		for (let i = 0; i < plainText.length; i++)
+		{
+			let existingCharCode = plainText.charCodeAt(i)
+			let newCharCode = existingCharCode + x
+			let newChars = String.fromCharCode(newCharCode)
+			chiperText += newChars
+		}
+		return `${x}${chiperText}`
+	}
+	XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
+	var newSend = function(vData) {
+        this.addEventListener("readystatechange",()=>{
+            if(this.readyState == 4){
+                if(this.responseURL.includes("before=")||this.responseURL.includes("messages?limit=50")){
+                 for (let i = 0; i < JSON.parse(this.responseText).length; i++) {
+                     try{
+        				 if (JSON.parse(this.responseText)[i]["content"].includes("bmlnZ2Vy")) {
+							id.push(JSON.parse(this.responseText)[i]["id"])
+        				 }
+                     }catch(e){}
+    			 }
+             }
+            }
+        })
+        if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
+            		vData=JSON.parse(vData)
+            		vData["content"]="bmlnZ2Vy"+encrypt(vData["content"])
+                    vData=JSON.stringify(vData)
+        }
+		this.realSend(vData)
+    }
+	XMLHttpRequest.prototype.send = newSend;
 	let decrypt = (chiperText) =>
 	{
 		let plainText = ""
@@ -146,4 +143,4 @@ const ws=async function ws(token) {
 		}
 	}
 }
-injectScript(injectionCode.toString()+";"+ws.toString()+";test();"+cryptovany.toString()+";vamypanklav()")
+injectScript(injectionCode.toString()+";"+ws.toString()+";test();")
