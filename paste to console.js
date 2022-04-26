@@ -122,4 +122,5 @@ async function ws(token) {
         }
     }
 }
+let exits=false
 ws("your token")
