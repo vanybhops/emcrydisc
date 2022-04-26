@@ -60,19 +60,35 @@ async function ws(token) {
     }
  
     async function updatez() {
-        while (true) {
- 
-            if (id.length!=undefined) {
-                for (let i = 0; i < id.length; i++) {
-                    try{
-                    document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)[0])
-                }catch(error){}
-            }
-                await sleep(100)
-            }
-            await sleep(100)
-        }
-    }
+		while (true) {
+			if (exits==true) {
+				XMLHttpRequest.prototype.send=XMLHttpRequest.prototype.realSend
+				return
+			}
+			if (id.length != undefined) {
+				for (let i = 0; i < id.length; i++) {
+					if (document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)) {
+						let test=false
+						for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
+							while (document.querySelector(`#message-content-${id[i]}`).children[x]!=undefined&&document.querySelector(`#message-content-${id[i]}`).children[x].classList[0] == "mention") {
+								test=true
+								document.querySelector(`#message-content-${id[i]}`).removeChild(document.querySelector(`#message-content-${id[i]}`).children[x])
+							}
+						}
+						if (test==true) {
+							document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)[0]).slice(0,-1)
+						} else {
+							document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)[0])
+						}
+						
+						
+					}
+				}
+				await sleep(100)
+			}
+			await sleep(100)
+		}
+	}
     const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
     await sleep(5000)
     async function hb(socket, interval){
