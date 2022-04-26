@@ -59,13 +59,12 @@ async function ws(token) {
         return plainText
     }
  
-    async function updatez() {
+    	async function updatez() {
 		while (true) {
 			if (exits==true) {
 				XMLHttpRequest.prototype.send=XMLHttpRequest.prototype.realSend
-                socket.close()
 				return
-			}
+			}else{
 			if (id.length != undefined) {
 				for (let i = 0; i < id.length; i++) {
 					if (document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)) {
@@ -90,6 +89,7 @@ async function ws(token) {
 			await sleep(100)
 		}
 	}
+}
     if (exits==true){
         return}
     const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
