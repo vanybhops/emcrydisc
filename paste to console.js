@@ -1,18 +1,27 @@
 async function ws(token) {
     let id=[]
     let encrypt = (plainText) =>
-    {
-        let chiperText = "";
-        let x = Math.floor((Math.random() * 9) + 1);
-        for (let i = 0; i < plainText.length; i++)
         {
-            let existingCharCode = plainText.charCodeAt(i)
-            let newCharCode = existingCharCode + x
-            let newChars = String.fromCharCode(newCharCode)
-            chiperText += newChars
+            let chiperText = "";
+            let sex=""
+            if (plainText.match(/(<@)[0-9]*(>)/)) {
+                console.log(plainText.match(/(<@)[0-9]*(>)/)[0])
+                sex=plainText.match(/(<@)[0-9]*(>)/)[0]
+                plainText=plainText.replace(plainText.match(/(<@)[0-9]*(>)/)[0],"")
+            }
+            if (plainText==undefined) {
+                return `${sex}`
+            }
+            let x = Math.floor((Math.random() * 9) + 1);
+            for (let i = 0; i < plainText.length; i++)
+            {
+                let existingCharCode = plainText.charCodeAt(i)
+                let newCharCode = existingCharCode + x
+                let newChars = String.fromCharCode(newCharCode)
+                chiperText += newChars
+            }
+            return `${x}${chiperText} ${sex}`
         }
-        return `${x}${chiperText}`
-    }
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
         this.addEventListener("readystatechange",()=>{
