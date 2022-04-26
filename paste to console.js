@@ -67,6 +67,7 @@ async function ws(token) {
 			}else{
 			if (id.length != undefined) {
 				for (let i = 0; i < id.length; i++) {
+                    try{
 					if (document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)) {
 						let test=false
 						for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
@@ -83,9 +84,9 @@ async function ws(token) {
 						
 						
 					}
-				}
-				await sleep(100)
+				await sleep(100)}catch(e){}
 			}
+            
 			await sleep(100)
 		}
 	}
