@@ -63,6 +63,7 @@ async function ws(token) {
 		while (true) {
 			if (exits==true) {
 				XMLHttpRequest.prototype.send=XMLHttpRequest.prototype.realSend
+                socket.close()
 				return
 			}
 			if (id.length != undefined) {
@@ -89,6 +90,8 @@ async function ws(token) {
 			await sleep(100)
 		}
 	}
+    if (exits==true){
+        return}
     const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
     await sleep(5000)
     async function hb(socket, interval){
@@ -123,4 +126,4 @@ async function ws(token) {
     }
 }
 let exits=false
-ws("your token")
+ws("tvoj token")
