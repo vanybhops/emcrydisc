@@ -1,11 +1,104 @@
 async function ws(token) {
-    let id=[]
+    let exits=true;
+    async function kastommeni(){
+        let kastmmenu = document.createElement("div");
+        document.body.appendChild(kastmmenu)
+        kastmmenu.style.top="50%"
+        kastmmenu.style.right="40%"
+        kastmmenu.style.position="absolute"
+        kastmmenu.style.width="25%"
+        kastmmenu.style.height="25%"
+        kastmmenu.style.zIndex=9999
+        kastmmenu.style.background="gray"
+        let prikvati= document.createElement("button");
+        prikvati.setAttribute("value","kastm")
+        kastmmenu.appendChild(prikvati)
+        prikvati.style.position="absolute"
+        prikvati.style.top="80%"
+        prikvati.style.left="52%"
+        prikvati.innerHTML="kastm"
+        prikvati.style.background=kastm==true?"green":"red"
+        let kastminput = document.createElement("input");
+        kastminput.setAttribute("type","text")
+        kastminput.setAttribute("value","kastm kod")
+        kastminput.style.justifyContent="center"
+        kastminput.style.right="37%"
+        kastminput.style.position="absolute"
+        kastmmenu.appendChild(kastminput)
+        prikvati.onclick=x=>{
+            kastm=!kastm
+            custom=kastminput.value
+            prikvati.style.background=kastm==true?"green":"red"
+        }
+        let ukljucenje=document.createElement("button");
+        ukljucenje.setAttribute("value","kastm")
+        kastmmenu.appendChild(ukljucenje)
+        ukljucenje.style.position="absolute"
+        ukljucenje.style.right="49%"
+        ukljucenje.style.top="80%"
+        ukljucenje.style.background="green"
+        ukljucenje.innerHTML="x"
+        ukljucenje.onclick=x=>{
+            kastmmenu.remove()
+        }
+        
+        let iskljucenje= document.createElement("button");
+        iskljucenje.setAttribute("value","kastm")
+        kastmmenu.appendChild(iskljucenje)
+        iskljucenje.style.position="absolute"
+        iskljucenje.style.top="80%"
+        iskljucenje.style.right="54%"
+        iskljucenje.innerHTML=exits==true?"ukljuci":"iskljuci"
+        iskljucenje.style.background=exits==true?"red":"green"
+        iskljucenje.onclick=x=>{
+            exits=!exits
+            iskljucenje.innerHTML=exits==true?"ukljuci":"iskljuci"
+            iskljucenje.style.background=exits==true?"red":"green"
+        }
+    }
+    let custom=""
+    let kastm=false
+    const onoff = document.querySelector('[aria-label="Channel header"]');
+    let btn = document.createElement("button");
+    onoff.appendChild(btn)
+    btn.style.width="20px"
+    btn.style.height="20px"
+    btn.style.background=exits==false?"green":"gray"
+    btn.onclick=()=>{
+        kastommeni()
+        btn.style.background=exits==false?"green":"gray"
+    }
+    const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
+    let oldHref=document.location.href
+    var bodyList = document.querySelector("body")
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (oldHref != document.location.href) {
+                oldHref = document.location.href;
+                const onoff = document.querySelector('[aria-label="Channel header"]');
+				let btn = document.createElement("button");
+				onoff.appendChild(btn)
+				btn.style.width="20px"
+				btn.style.height="20px"
+                btn.style.background=exits==false?"green":"gray"
+				btn.onclick=()=>{
+                    kastommeni()
+					btn.style.background=exits==false?"green":"gray"
+				}
+            }
+        });
+    });
+    
+    var config = {
+        childList: true,
+        subtree: true
+    };
+    observer.observe(bodyList, config);
     let encrypt = (plainText) =>
         {
             let chiperText = "";
             let sex=""
             if (plainText.match(/(<@)[0-9]*(>)/)) {
-                console.log(plainText.match(/(<@)[0-9]*(>)/)[0])
                 sex=plainText.match(/(<@)[0-9]*(>)/)[0]
                 plainText=plainText.replace(plainText.match(/(<@)[0-9]*(>)/)[0],"")
             }
@@ -24,24 +117,30 @@ async function ws(token) {
         }
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
-        this.addEventListener("readystatechange",()=>{
-            if(this.readyState == 4){
-                if(this.responseURL.includes("before=")||this.responseURL.includes("messages?limit=50")){
-                 for (let i = 0; i < JSON.parse(this.responseText).length; i++) {
-                     try{
-                         if (JSON.parse(this.responseText)[i]["content"].includes("bmlnZ2Vy")) {
-                            id.push(JSON.parse(this.responseText)[i]["id"])
-                         }
-                     }catch(e){}
-                 }
-             }
-            }
-        })
-        if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
-                    vData=JSON.parse(vData)
-                    vData["content"]="bmlnZ2Vy"+encrypt(vData["content"])
-                    vData=JSON.stringify(vData)
-        }
+		if(exits==false){
+			this.addEventListener("readystatechange",()=>{
+				if(this.readyState == 4){
+					if(this.responseURL.includes("before=")||this.responseURL.includes("messages?limit=50")){
+					for (let i = 0; i < JSON.parse(this.responseText).length; i++) {
+						try{
+							if (JSON.parse(this.responseText)[i]["content"].includes("bmlnZ2Vy")||JSON.parse(this.responseText)[i]["content"].includes(custom)) {
+								id.push(JSON.parse(this.responseText)[i]["id"])
+							}
+						}catch(e){}
+					}
+				}
+				}
+			})
+			if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
+						if(vData.includes('"attachments": [{')){
+							return this  
+						}
+						vData=JSON.parse(vData)
+                        
+						vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
+						vData=JSON.stringify(vData) 
+			}
+		}
         this.realSend(vData)
     }
     XMLHttpRequest.prototype.send = newSend;
@@ -61,40 +160,31 @@ async function ws(token) {
  
     	async function updatez() {
 		while (true) {
-			if (exits==true) {
-				XMLHttpRequest.prototype.send=XMLHttpRequest.prototype.realSend
-				return
-			}else{
-			if (id.length != undefined) {
+			if (id.length != 0) {
+                console.log("koji kurac")
 				for (let i = 0; i < id.length; i++) {
+                    let regexp=new RegExp(`(?<=${custom})(.*)`,"gms")
                     try{
-					if (document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)) {
-						let test=false
-						for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
-							while (document.querySelector(`#message-content-${id[i]}`).children[x]!=undefined&&document.querySelector(`#message-content-${id[i]}`).children[x].classList[0] == "mention") {
-								test=true
-								document.querySelector(`#message-content-${id[i]}`).removeChild(document.querySelector(`#message-content-${id[i]}`).children[x])
-							}
+                    let decrypthis=document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)||document.querySelector(`#message-content-${id[i]}`).textContent.match(regexp)
+                    let test=false
+					for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
+						while (document.querySelector(`#message-content-${id[i]}`).children[x]!=undefined&&document.querySelector(`#message-content-${id[i]}`).children[x].classList[0] == "mention") {
+							test=true
+							document.querySelector(`#message-content-${id[i]}`).removeChild(document.querySelector(`#message-content-${id[i]}`).children[x])
 						}
-						if (test==true) {
-							document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)[0]).slice(0,-1)
-						} else {
-							document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)[0])
-						}
-						
-						
 					}
-				await sleep(100)}catch(e){}
+					if (test==true) 
+						document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(decrypthis[0])
+                    else
+						document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(decrypthis[0])		
+                    }catch{}				
+				}
+				await sleep(100)
 			}
-            
 			await sleep(100)
-		}
+
 	}
 }
-    if (exits==true){
-        return}
-    const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
-    await sleep(5000)
     async function hb(socket, interval){
         while(true){
             let hbpayload={
@@ -105,15 +195,14 @@ async function ws(token) {
             await sleep(interval);
         };
     }
+    let id=[]
     socket= new WebSocket("wss://gateway.discord.gg/?encoding=json");
     socket.onclose=()=>{ws(token)}
     socket.onopen=()=>{
-        updatez()
         socket.send(JSON.stringify({"op":2,"d":{"token":token,"capabilities":509,"properties":{"os":"Windows","browser":"Chrome","device":"","system_locale":"en-US","browser_user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36","browser_version":"100.0.4896.127","os_version":"10","referrer":"","referring_domain":"","referrer_current":"","referring_domain_current":"","release_channel":"stable","client_build_number":125308,"client_event_source":null},"presence":{"status":"online","since":0,"activities":[],"afk":false},"compress":false,"client_state":{"guild_hashes":{},"highest_last_message_id":"0","read_state_version":0,"user_guild_settings_version":-1,"user_settings_version":-1}}}))}
     socket.onmessage=(x)=>{
         for (let i = 0; i < id.length; i++) {
             const element = id[i];
-            
         }
     let ejson=JSON.parse(x.data)
     if(ejson["d"]!=null&&ejson["d"].hasOwnProperty("heartbeat_interval")){
@@ -123,8 +212,12 @@ async function ws(token) {
     else if (ejson["t"]=="MESSAGE_CREATE")
         if(ejson["d"]["content"].startsWith("bmlnZ2Vy")){
             id.push(ejson["d"]["id"])
+            updatez()
+        }
+        if (custom!=""&&ejson["d"]["content"].startsWith(custom)){
+            id.push(ejson["d"]["id"])
+            updatez()
         }
     }
 }
-let exits=false
-ws("tvoj token")
+ws("OTQ1MDc0Mzk1NzA0MDc0Mjcx.GJKxQi.CPXpUpuzdtqxrhAVLjCxuDxnYoqADOhcX-xLw8")
