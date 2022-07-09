@@ -215,7 +215,7 @@ async function ws(token) {
             id.push(ejson["d"]["id"])
             updatez()
         }
-        if (custom!=""&&ejson["d"]["content"].startsWith(custom)){
+        if (kastm==true&&ejson["d"]["content"].startsWith(custom)){
             id.push(ejson["d"]["id"])
             updatez()
         }
