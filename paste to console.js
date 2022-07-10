@@ -98,13 +98,13 @@ async function ws(token) {
     let encrypt = (plainText) =>
         {
             let chiperText = "";
-            let sex=""
+            let tekst=""
             if (plainText.match(/(<@)[0-9]*(>)/)) {
-                sex=plainText.match(/(<@)[0-9]*(>)/)[0]
+                tekst=plainText.match(/(<@)[0-9]*(>)/)[0]
                 plainText=plainText.replace(plainText.match(/(<@)[0-9]*(>)/)[0],"")
             }
             if (plainText==undefined) {
-                return `${sex}`
+                return `${tekst}`
             }
             let x = Math.floor((Math.random() * 9) + 1);
             for (let i = 0; i < plainText.length; i++)
@@ -114,7 +114,7 @@ async function ws(token) {
                 let newChars = String.fromCharCode(newCharCode)
                 chiperText += newChars
             }
-            return `${x}${chiperText} ${sex}`
+            return `${x}${chiperText} ${tekst}`
         }
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
@@ -162,7 +162,6 @@ async function ws(token) {
     	async function updatez() {
 		while (true) {
 			if (id.length != 0) {
-                console.log("koji kurac")
 				for (let i = 0; i < id.length; i++) {
                     let regexp=new RegExp(`(?<=${custom})(.*)`,"gms")
                     try{
