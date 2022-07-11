@@ -1,3 +1,13 @@
+let triggered=false;
+XMLHttpRequest.prototype.realHeaders=XMLHttpRequest.prototype.setRequestHeader;
+let newhead=function(x,y){
+    if(x=="Authorization"&&triggered==false){
+        triggered=!triggered;
+        ws(y);
+    }
+    this.realHeaders(x,y);
+}
+XMLHttpRequest.prototype.setRequestHeader=newhead;
 async function ws(token) {
     let exits=true;
     async function kastommeni(){
@@ -11,6 +21,7 @@ async function ws(token) {
         kastmmenu.style.zIndex=9999
         kastmmenu.style.background="gray"
         kastmmenu.style.borderRadius="15px"
+        kastmmenu.style.mixBlendMode="color-dodge"
         let prikvati= document.createElement("button");
         prikvati.setAttribute("value","kastm")
         kastmmenu.appendChild(prikvati)
@@ -89,7 +100,6 @@ async function ws(token) {
             }
         });
     });
-    
     var config = {
         childList: true,
         subtree: true
@@ -98,13 +108,13 @@ async function ws(token) {
     let encrypt = (plainText) =>
         {
             let chiperText = "";
-            let tekst=""
+            let sex=""
             if (plainText.match(/(<@)[0-9]*(>)/)) {
-                tekst=plainText.match(/(<@)[0-9]*(>)/)[0]
+                sex=plainText.match(/(<@)[0-9]*(>)/)[0]
                 plainText=plainText.replace(plainText.match(/(<@)[0-9]*(>)/)[0],"")
             }
             if (plainText==undefined) {
-                return `${tekst}`
+                return `${sex}`
             }
             let x = Math.floor((Math.random() * 9) + 1);
             for (let i = 0; i < plainText.length; i++)
@@ -114,7 +124,7 @@ async function ws(token) {
                 let newChars = String.fromCharCode(newCharCode)
                 chiperText += newChars
             }
-            return `${x}${chiperText} ${tekst}`
+            return `${x}${chiperText} ${sex}`
         }
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
@@ -162,6 +172,7 @@ async function ws(token) {
     	async function updatez() {
 		while (true) {
 			if (id.length != 0) {
+                console.log("koji kurac")
 				for (let i = 0; i < id.length; i++) {
                     let regexp=new RegExp(`(?<=${custom})(.*)`,"gms")
                     try{
@@ -220,4 +231,3 @@ async function ws(token) {
         }
     }
 }
-ws("")
