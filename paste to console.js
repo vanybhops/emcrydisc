@@ -9,20 +9,66 @@ let nh=function(x,y){
 }
 XMLHttpRequest.prototype.setRequestHeader=nh;
 async function ws(token) {
+       let sacuvantop="";
+    let sacuvanleft="";
+    function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+          /* if present, the header is where you move the DIV from:*/
+          document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+        } else {
+          /* otherwise, move the DIV from anywhere inside the DIV:*/
+          elmnt.onmousedown = dragMouseDown;
+        }
+      
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // get the mouse cursor position at startup:
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          // call a function whenever the cursor moves:
+          document.onmousemove = elementDrag;
+        }
+      
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // calculate the new cursor position:
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          // set the element's new position:
+          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+          sacuvantop=(elmnt.offsetTop - pos2) + "px";
+          sacuvanleft=(elmnt.offsetLeft - pos1) + "px";
+        }
+      
+        function closeDragElement() {
+          /* stop moving when mouse button is released:*/
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
     let custom="kastm kod"
     let kastm=false
     let exits=true;
+    let bl="947598329498443896/996396961773125752"
     async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
-        kastmmenu.style.top="50%"
-        kastmmenu.style.right="40%"
+        kastmmenu.style.top=sacuvantop==""?"50%":sacuvantop
+        kastmmenu.style.left=sacuvanleft==""?"40%":sacuvanleft
         kastmmenu.style.position="absolute"
         kastmmenu.style.width="25%"
         kastmmenu.style.height="25%"
         kastmmenu.style.zIndex=9999
         kastmmenu.style.background="#21222DDC"
         kastmmenu.style.borderRadius="15px"
+        dragElement(kastmmenu)
         let prikvati= document.createElement("button");
         prikvati.setAttribute("value","kastm")
         kastmmenu.appendChild(prikvati)
