@@ -22,7 +22,7 @@ async function ws(token) {
         kastmmenu.style.width="25%"
         kastmmenu.style.height="25%"
         kastmmenu.style.zIndex=9999
-        kastmmenu.style.background="gray"
+        kastmmenu.style.background="#21222DDC"
         kastmmenu.style.borderRadius="15px"
         kastmmenu.style.mixBlendMode="color-dodge"
         let prikvati= document.createElement("button");
