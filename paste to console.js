@@ -12,7 +12,7 @@ async function ws(token) {
     let custom="kastm kod"
     let kastm=false
     let exits=true;
-    let bl="947598329498443896/996409528394457098"
+    let bl="947598329498443896/996418438086004807"
     async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
@@ -71,7 +71,7 @@ async function ws(token) {
             iskljucenje.style.background=exits==true?"red":"green"
         }
     }
-    const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
+    try{const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
     let btn = document.createElement("button");
     onoff.appendChild(btn)
     btn.style.width="20px"
@@ -83,7 +83,7 @@ async function ws(token) {
     btn.onclick=()=>{
         kastommeni()
         btn.style.background=exits==false?"green":"gray"
-    }
+    }}catch{}
     const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
     let oldHref=document.location.href
     var bodyList = document.querySelector("body")
@@ -92,7 +92,7 @@ async function ws(token) {
             if (oldHref != document.location.href) {
                 console.log("dirchange")
                 oldHref = document.location.href;
-                const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
+                try{const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
 				let btn = document.createElement("button");
 				onoff.appendChild(btn)
 				btn.style.width="20px"
@@ -104,7 +104,7 @@ async function ws(token) {
 				btn.onclick=()=>{
                     kastommeni()
 					btn.style.background=exits==false?"green":"gray"
-				}
+				}}catch{}
             }
         });
     });
