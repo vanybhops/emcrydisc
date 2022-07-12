@@ -12,7 +12,7 @@ async function ws(token) {
     let custom="kastm kod"
     let kastm=false
     let exits=true;
-    let bl="947598329498443896/996396961773125752"
+    let bl="947598329498443896/996408853367357530"
     async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
