@@ -159,7 +159,7 @@ async function ws(token) {
 							return this  
 						}
 						vData=JSON.parse(vData)
-                        if(penis["attachments"]==undefined)
+                        if(vData["attachments"]==undefined)
 						    vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
 						vData=JSON.stringify(vData) 
 			}
