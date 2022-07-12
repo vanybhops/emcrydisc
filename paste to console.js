@@ -71,11 +71,14 @@ async function ws(token) {
             iskljucenje.style.background=exits==true?"red":"green"
         }
     }
-    const onoff = document.querySelector('[aria-label="Channel header"]');
+    const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
     let btn = document.createElement("button");
     onoff.appendChild(btn)
     btn.style.width="20px"
     btn.style.height="20px"
+    btn.style.top="25%"
+    btn.style.right="100%"
+    btn.style.position="relative"
     btn.style.background=exits==false?"green":"gray"
     btn.onclick=()=>{
         kastommeni()
@@ -87,12 +90,16 @@ async function ws(token) {
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (oldHref != document.location.href) {
+                console.log("dirchange")
                 oldHref = document.location.href;
-                const onoff = document.querySelector('[aria-label="Channel header"]');
+                const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
 				let btn = document.createElement("button");
 				onoff.appendChild(btn)
 				btn.style.width="20px"
 				btn.style.height="20px"
+                btn.style.top="25%"
+                btn.style.right="100%"
+                btn.style.position="relative"
                 btn.style.background=exits==false?"green":"gray"
 				btn.onclick=()=>{
                     kastommeni()
