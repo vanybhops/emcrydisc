@@ -138,8 +138,12 @@ async function ws(token) {
             }
             return `${x}${chiperText} ${sex}`
         }
-    XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
+	XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
+        try{
+            console.log(JSON.parse(vData))
+        }catch{
+            return this.realSend(vData)}
 		if(exits==false){
 			this.addEventListener("readystatechange",()=>{
 				if(this.readyState == 4){
@@ -155,13 +159,9 @@ async function ws(token) {
 				}
 			})
 			if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
-						if(vData.includes('"attachments": [{')){
-							return this  
-						}
 						vData=JSON.parse(vData)
-                        if(vData["attachments"]==undefined)
-						    vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
-						vData=JSON.stringify(vData) 
+						vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
+						vData=JSON.stringify(vData)
 			}
 		}
         this.realSend(vData)
