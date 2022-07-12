@@ -159,8 +159,8 @@ async function ws(token) {
 							return this  
 						}
 						vData=JSON.parse(vData)
-                        
-						vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
+                        if(penis["attachments"]==undefined)
+						    vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
 						vData=JSON.stringify(vData) 
 			}
 		}
