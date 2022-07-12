@@ -24,7 +24,6 @@ async function ws(token) {
         kastmmenu.style.zIndex=9999
         kastmmenu.style.background="#21222DDC"
         kastmmenu.style.borderRadius="15px"
-        kastmmenu.style.mixBlendMode="color-dodge"
         let prikvati= document.createElement("button");
         prikvati.setAttribute("value","kastm")
         kastmmenu.appendChild(prikvati)
