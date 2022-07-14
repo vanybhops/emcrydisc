@@ -63,6 +63,7 @@ async function ws(token) {
         kastmmenu.style.position = "absolute"
         kastmmenu.style.width = "25%"
         kastmmenu.style.height = "25%"
+        kastmmenu.style.padding = "1%";
         kastmmenu.style.zIndex = 9999
         kastmmenu.style.background = "#21222DDC"
         kastmmenu.style.borderRadius = "15px"
