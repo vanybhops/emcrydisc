@@ -76,11 +76,16 @@ async function ws(token) {
         prikvati.innerHTML = "kastm"
         prikvati.style.background = kastm == true ? "green" : "red"
         let kastminput = document.createElement("input");
-        kastminput.setAttribute("type", "text")
-        kastminput.setAttribute("value", "kastm kod")
-        kastminput.style.justifyContent = "center"
-        kastminput.style.right = "37%"
-        kastminput.style.position = "absolute"
+        kastminput.style.margin = "auto";
+        kastminput.style.display = "block";
+        kastminput.style.fontFamily = "consolas";
+        kastminput.style.width = "30%";
+        kastminput.style.height = "5%";
+        kastminput.style.background = "rgba(0,0,0,0.2)";
+        kastminput.style.border = "1px solid rgba(0,0,0,0);";
+        kastminput.style.borderBottom = "3px solid lightblue";
+        kastminput.style.color = "white";
+        kastminput.style.padding = "0 0 0 2%";
         kastmmenu.appendChild(kastminput)
         prikvati.onclick = x => {
             kastm = !kastm
