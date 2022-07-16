@@ -77,6 +77,7 @@ async function ws(token) {
         prikvati.style.background=kastm==true?"green":"red"
         let kastminput = document.createElement("input");
         kastminput.style.cssText="margin: auto; display: block; font-family: consolas; width: 30%; height: 10%; background: rgba(0, 0, 0, 0.2); border-bottom: 3px solid lightblue; color: white; padding: 0px 0px 0px 2%;"
+        kastminput.value=custom
         kastmmenu.appendChild(kastminput)
         kastminput.onclick=()=>{
             kastminput.focus()
