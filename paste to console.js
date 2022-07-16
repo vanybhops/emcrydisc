@@ -89,7 +89,7 @@ async function ws(token) {
         kastminput.style.padding = "0 0 0 2%";
         kastminput.autofocus=true
         kastmmenu.appendChild(kastminput)
-        kastmmenu.onclick=()=>{
+        kastminput.onclick=()=>{
             kastminput.focus()
         }
         prikvati.onclick = x => {
