@@ -100,7 +100,6 @@ async function ws(token) {
         }
     }
     const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
-    let bl = "947598329498443896/996418438086004807"
     let btn = document.createElement("button");
     onoff.appendChild(btn)
     btn.style.width="20px"
