@@ -55,72 +55,47 @@ async function ws(token) {
     let custom = "kastm kod"
     let kastm = false
     let exits = true;
-    async function kastommeni() {
-        let kastmmenu = document.createElement("div");
+    async function kastommeni() {let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
-        kastmmenu.style.top = sacuvantop == "" ? "50%" : sacuvantop
-        kastmmenu.style.left = sacuvanleft == "" ? "40%" : sacuvanleft
-        kastmmenu.style.position = "absolute"
-        kastmmenu.style.width = "25%"
-        kastmmenu.style.height = "25%"
-        kastmmenu.style.padding = "1%";
-        kastmmenu.style.zIndex = 9999
-        kastmmenu.style.background = "#21222DDC"
-        kastmmenu.style.borderRadius = "15px"
+        kastmmenu.style.cssText="top: 12px; left: 836px; position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
+        let ukljucenje=document.createElement("button");
+        ukljucenje.setAttribute("value","kastm")
+        kastmmenu.appendChild(ukljucenje)
+        ukljucenje.style.cssText="position: relative;color: red;font-size: 20px;left: 95%;top: -5%;background: transparent;margin-right: 45px;"
+        ukljucenje.innerHTML="X"
+        ukljucenje.onclick=x=>{
+            kastmmenu.remove()
+        }
         dragElement(kastmmenu)
-        let prikvati = document.createElement("button");
-        prikvati.setAttribute("value", "kastm")
+        let prikvati= document.createElement("button");
+        prikvati.setAttribute("value","kastm")
         kastmmenu.appendChild(prikvati)
-        prikvati.style.position = "absolute"
-        prikvati.style.top = "80%"
-        prikvati.style.left = "52%"
-        prikvati.innerHTML = "kastm"
-        prikvati.style.background = kastm == true ? "green" : "red"
+        prikvati.style.position="absolute"
+        prikvati.style.top="80%"
+        prikvati.style.left="52%"
+        prikvati.innerHTML="kastm"
+        prikvati.style.background=kastm==true?"green":"red"
         let kastminput = document.createElement("input");
-        kastminput.style.margin = "auto";
-        kastminput.style.display = "block";
-        kastminput.style.fontFamily = "consolas";
-        kastminput.style.width = "30%";
-        kastminput.style.height = "5%";
-        kastminput.style.background = "rgba(0,0,0,0.2)";
-        kastminput.style.border = "1px solid rgba(0,0,0,0);";
-        kastminput.style.borderBottom = "3px solid lightblue";
-        kastminput.style.color = "white";
-        kastminput.style.padding = "0 0 0 2%";
-        kastminput.autofocus=true
+        kastminput.style.cssText="margin: auto; display: block; font-family: consolas; width: 30%; height: 10%; background: rgba(0, 0, 0, 0.2); border-bottom: 3px solid lightblue; color: white; padding: 0px 0px 0px 2%;"
         kastmmenu.appendChild(kastminput)
         kastminput.onclick=()=>{
             kastminput.focus()
         }
-        prikvati.onclick = x => {
-            kastm = !kastm
-            custom = kastminput.value
-            prikvati.style.background = kastm == true ? "green" : "red"
+        prikvati.onclick=x=>{
+            kastm=!kastm
+            custom=kastminput.value
+            prikvati.style.background=kastm==true?"green":"red"
         }
-        let ukljucenje = document.createElement("button");
-        ukljucenje.setAttribute("value", "kastm")
-        kastmmenu.appendChild(ukljucenje)
-        ukljucenje.style.position = "absolute"
-        ukljucenje.style.right = "49%"
-        ukljucenje.style.top = "80%"
-        ukljucenje.style.background = "green"
-        ukljucenje.innerHTML = "x"
-        ukljucenje.onclick = x => {
-            kastmmenu.remove()
-        }
-
-        let iskljucenje = document.createElement("button");
-        iskljucenje.setAttribute("value", "kastm")
+        let iskljucenje= document.createElement("button");
+        iskljucenje.setAttribute("value","kastm")
         kastmmenu.appendChild(iskljucenje)
-        iskljucenje.style.position = "absolute"
-        iskljucenje.style.top = "80%"
-        iskljucenje.style.right = "54%"
-        iskljucenje.innerHTML = exits == true ? "ukljuci" : "iskljuci"
-        iskljucenje.style.background = exits == true ? "red" : "green"
-        iskljucenje.onclick = x => {
-            exits = !exits
-            iskljucenje.innerHTML = exits == true ? "ukljuci" : "iskljuci"
-            iskljucenje.style.background = exits == true ? "red" : "green"
+        iskljucenje.style.cssText="position: absolute; top: 80%; right: 54%"
+        iskljucenje.style.background=exits==true?"red":"green"
+        iskljucenje.innerHTML=exits==true?"ukljuci":"iskljuci"
+        iskljucenje.onclick=x=>{
+            exits=!exits
+            iskljucenje.innerHTML=exits==true?"ukljuci":"iskljuci"
+            iskljucenje.style.background=exits==true?"red":"green"
         }
     }
     try {
