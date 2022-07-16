@@ -58,9 +58,9 @@ async function ws(token) {
     async function kastommeni() {
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
+        kastmmenu.style.cssText="position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
         kastmmenu.style.top=sacuvantop;
         kastmmenu.style.left=sacuvanleft;
-        kastmmenu.style.cssText="position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
         let ukljucenje=document.createElement("button");
         ukljucenje.setAttribute("value","kastm")
         kastmmenu.appendChild(ukljucenje)
