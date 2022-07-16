@@ -9,8 +9,8 @@ let nh = function(x, y) {
 }
 XMLHttpRequest.prototype.setRequestHeader = nh;
 async function ws(token) {
-    let sacuvantop = "";
-    let sacuvanleft = "";
+    let sacuvantop="35%";
+    let sacuvanleft="37%";
 
     function dragElement(elmnt) {
         var pos1 = 0,
@@ -55,9 +55,12 @@ async function ws(token) {
     let custom = "kastm kod"
     let kastm = false
     let exits = true;
-    async function kastommeni() {let kastmmenu = document.createElement("div");
+    async function kastommeni() {
+        let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
-        kastmmenu.style.cssText="top: 12px; left: 836px; position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
+        kastmmenu.style.top=sacuvantop;
+        kastmmenu.style.left=sacuvanleft;
+        kastmmenu.style.cssText="position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
         let ukljucenje=document.createElement("button");
         ukljucenje.setAttribute("value","kastm")
         kastmmenu.appendChild(ukljucenje)
