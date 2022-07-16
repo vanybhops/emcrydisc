@@ -198,7 +198,7 @@ async function ws(token) {
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     var newSend = function(vData) {
         try {
-            console.log(JSON.parse(vData))
+            JSON.parse(vData)
         } catch {
             return this.realSend(vData)
         }
@@ -240,7 +240,6 @@ async function ws(token) {
     async function updatez() {
         while (true) {
             if (id.length != 0) {
-                console.log("koji kurac")
                 for (let i = 0; i < id.length; i++) {
                     let regexp = new RegExp(`(?<=${custom})(.*)`, "gms")
                     try {
