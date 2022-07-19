@@ -1,14 +1,4 @@
-let triggered=false;
-XMLHttpRequest.prototype.RH=XMLHttpRequest.prototype.setRequestHeader;
-let nh=function(x,y){
-    if(x=="Authorization"&&triggered==false){
-        triggered=!triggered;
-        ws(y);
-    }
-    this.RH(x,y);
-}
-XMLHttpRequest.prototype.setRequestHeader=nh;
-async function ws(token) {
+async function ws(login) {
     let sacuvantop="35%";
     let sacuvanleft="37%";
     function dragElement(elmnt) {
@@ -254,10 +244,10 @@ async function ws(token) {
     let id=[]
     socket= new WebSocket("wss://gateway.discord.gg/?encoding=json");
     socket.onclose=()=>{
-        ws(token)
+        ws(login)
     }
     socket.onopen=()=>{
-        socket.send(JSON.stringify({"op":2,"d":{"token":token,"capabilities":509,"properties":{"os":"Windows","browser":"Chrome","device":"","system_locale":"en-US","browser_user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36","browser_version":"100.0.4896.127","os_version":"10","referrer":"","referring_domain":"","referrer_current":"","referring_domain_current":"","release_channel":"stable","client_build_number":125308,"client_event_source":null},"presence":{"status":"online","since":0,"activities":[],"afk":false},"compress":false,"client_state":{"guild_hashes":{},"highest_last_message_id":"0","read_state_version":0,"user_guild_settings_version":-1,"user_settings_version":-1}}}))}
+        socket.send(JSON.stringify({"op":2,"d":{"token":login,"capabilities":509,"properties":{"os":"Windows","browser":"Chrome","device":"","system_locale":"en-US","browser_user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36","browser_version":"100.0.4896.127","os_version":"10","referrer":"","referring_domain":"","referrer_current":"","referring_domain_current":"","release_channel":"stable","client_build_number":125308,"client_event_source":null},"presence":{"status":"online","since":0,"activities":[],"afk":false},"compress":false,"client_state":{"guild_hashes":{},"highest_last_message_id":"0","read_state_version":0,"user_guild_settings_version":-1,"user_settings_version":-1}}}))}
     socket.onmessage=(x)=>{
         for (let i = 0; i < id.length; i++) {
             const element = id[i];
@@ -278,3 +268,4 @@ async function ws(token) {
         }
     }
 }
+ws((webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getId!==void 0).exports.default[atob("Z2V0VG9rZW4")]())
