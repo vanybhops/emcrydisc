@@ -173,7 +173,7 @@ async function ws(login) {
 					if(this.responseURL.includes("before=")||this.responseURL.includes("messages?limit=50")){
 					for (let i = 0; i < JSON.parse(this.responseText).length; i++) {
 						try{
-							if (JSON.parse(this.responseText)[i]["content"].includes("bmlnZ2Vy")||JSON.parse(this.responseText)[i]["content"].includes(custom)) {
+							if (JSON.parse(this.responseText)[i]["content"].includes("Y3VzdG9tIGtleQ")||JSON.parse(this.responseText)[i]["content"].includes(custom)) {
 								id.push(JSON.parse(this.responseText)[i]["id"])
 							}
 						}catch(e){}
@@ -183,7 +183,7 @@ async function ws(login) {
 			})
 			if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
 						vData=JSON.parse(vData)
-						vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
+						vData["content"]=(kastm==true?custom:"Y3VzdG9tIGtleQ")+encrypt(vData["content"])
 						vData=JSON.stringify(vData)
 			}
 		}
@@ -210,7 +210,7 @@ async function ws(login) {
 				for (let i = 0; i < id.length; i++) {
                     let regexp=new RegExp(`(?<=${custom})(.*)`,"gms")
                     try{
-                    let decrypthis=document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=bmlnZ2Vy)(.*)/gms)||document.querySelector(`#message-content-${id[i]}`).textContent.match(regexp)
+                    let decrypthis=document.querySelector(`#message-content-${id[i]}`).textContent.match(/(?<=Y3VzdG9tIGtleQ)(.*)/gms)||document.querySelector(`#message-content-${id[i]}`).textContent.match(regexp)
                     let test=false
 					for (let x = 0; x < document.querySelector(`#message-content-${id[i]}`).children.length; x++) {
 						while (document.querySelector(`#message-content-${id[i]}`).children[x]!=undefined&&document.querySelector(`#message-content-${id[i]}`).children[x].classList[0] == "mention") {
@@ -258,7 +258,7 @@ async function ws(login) {
         hb(socket, interval);
     }
     else if (ejson["t"]=="MESSAGE_CREATE")
-        if(ejson["d"]["content"].startsWith("bmlnZ2Vy")){
+        if(ejson["d"]["content"].startsWith("Y3VzdG9tIGtleQ")){
             id.push(ejson["d"]["id"])
             updatez()
         }
