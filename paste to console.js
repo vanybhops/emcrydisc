@@ -44,14 +44,28 @@ async function ws(login) {
     async function kastommeni(){
         let kastmmenu = document.createElement("div");
         document.body.appendChild(kastmmenu)
-        kastmmenu.style.cssText="position: absolute; width: 25%; height: 25%; z-index: 9999; padding: 1%; background: rgba(33, 34, 45, 0.863); border-radius: 15px;"
+        kastmmenu.style.cssText=`
+            position: absolute; 
+            width: 25%; 
+            height: 25%;
+            z-index: 9999; 
+            padding: 1%; 
+            background: rgba(33, 34, 45, 0.863); 
+            border-radius: 15px;`;
         kastmmenu.style.top=sacuvantop;
         kastmmenu.style.left=sacuvanleft;
         let ukljucenje=document.createElement("button");
         ukljucenje.setAttribute("value","kastm")
         kastmmenu.appendChild(ukljucenje)
-        ukljucenje.style.cssText="position: relative;color: red;font-size: 20px;left: 95%;top: -5%;background: transparent;margin-right: 45px;"
-        ukljucenje.innerHTML="X"
+        ukljucenje.style.cssText=`
+            position: relative;
+            color: red;
+            font-size: 20px;
+            left: 95%;
+            top: -5%;
+            background: transparent;
+            margin-right: 45px;`;
+        ukljucenje.innerHTML="❌";
         ukljucenje.onclick=x=>{
             kastmmenu.remove()
         }
@@ -59,13 +73,24 @@ async function ws(login) {
         let prikvati= document.createElement("button");
         prikvati.setAttribute("value","kastm")
         kastmmenu.appendChild(prikvati)
-        prikvati.style.position="absolute"
-        prikvati.style.top="80%"
-        prikvati.style.left="52%"
+        prikvati.style = `
+            position: absolute;
+            top: 80%;
+            left: 52%;`;
         prikvati.innerHTML="kastm"
         prikvati.style.background=kastm==true?"green":"red"
         let kastminput = document.createElement("input");
-        kastminput.style.cssText="margin: auto; display: block; font-family: consolas; width: 30%; height: 10%; background: rgba(0, 0, 0, 0.2); border-bottom: 3px solid lightblue; color: white; padding: 0px 0px 0px 2%;"
+        kastminput.style.cssText=`
+            margin: auto;
+            display: block; 
+            font-family: cursive; 
+            width: 40%; 
+            height: 10%; 
+            background: rgba(0, 0, 0, 0.2); 
+            border: 1px solid rgba(0,0,0,0);
+            border-bottom: 3px solid lightblue; 
+            color: white; 
+            text-align: center;`;
         kastmmenu.appendChild(kastminput)
         kastminput.value=custom
         kastminput.onclick=()=>{
@@ -79,23 +104,33 @@ async function ws(login) {
         let iskljucenje= document.createElement("button");
         iskljucenje.setAttribute("value","kastm")
         kastmmenu.appendChild(iskljucenje)
-        iskljucenje.style.cssText="position: absolute; top: 80%; right: 54%"
-        iskljucenje.style.background=exits==true?"red":"green"
+        iskljucenje.style.cssText=`
+            position: relative; 
+            top: 80%; 
+            right: 54%`;
+        iskljucenje.style.background=exits==true?"white":"green"
         iskljucenje.innerHTML=exits==true?"ukljuci":"iskljuci"
         iskljucenje.onclick=x=>{
             exits=!exits
             iskljucenje.innerHTML=exits==true?"ukljuci":"iskljuci"
-            iskljucenje.style.background=exits==true?"red":"green"
+            iskljucenje.style.background=exits==true?"white":"green"
         }
     }
     const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
     let btn = document.createElement("button");
     onoff.appendChild(btn)
-    btn.style.width="20px"
-    btn.style.height="20px"
-    btn.style.top="25%"
-    btn.style.right="100%"
-    btn.style.position="relative"
+    btn.style = `
+        border-radius: 5px;
+        border: 1px solid white;
+        width: 6.5%;
+        height: 20px;
+        top: 25%;
+        right: 100%;
+        position: relative;
+        font-family: arial;
+        text-align: center;
+        font-weight: bold;
+        postion: relative;`;
     btn.style.background=exits==false?"green":"gray"
     btn.onclick=()=>{
         kastommeni()
@@ -122,11 +157,17 @@ async function ws(login) {
                 const onoff = document.querySelector(`[aria-label="Send a gift"]`).parentElement;
 				let btn = document.createElement("button");
 				onoff.appendChild(btn)
-				btn.style.width="20px"
-				btn.style.height="20px"
-                btn.style.top="25%"
-                btn.style.right="100%"
-                btn.style.position="relative"
+                btn.style = `
+                    border-radius: 5px;
+                    border: 1px solid white;
+                    width: 5%;
+                    height: 20px;
+                    top: 25%;
+                    right: 100%;
+                    font-family: arial;
+                    text-align: center;
+                    font-weight: bold;
+                    postion: relative;`;
                 btn.style.background=exits==false?"green":"gray"
 				btn.onclick=()=>{
                     kastommeni()
