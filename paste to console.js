@@ -101,7 +101,7 @@ async function ws(login) {
         kastommeni()
         btn.style.background=exits==false?"green":"gray"
     }
-    let bl = "947598329498443896/996418438086004807"
+    let bl = "986309038457376778/1004014251108745266"
     const sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
     };
