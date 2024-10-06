@@ -171,7 +171,7 @@ async function ws(p) {
 				}
 				}
 			})
-			if(this.__sentry_xhr__.url.includes("/messages")&&this.__sentry_xhr__.method=="POST"){
+			if(this.__sentry_xhr_v3__.url.includes("/messages")&&this.__sentry_xhr_v3__.method=="POST"){
 						vData=JSON.parse(vData)
 						vData["content"]=(kastm==true?custom:"bmlnZ2Vy")+encrypt(vData["content"])
 						vData=JSON.stringify(vData)
